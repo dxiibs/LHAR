@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
 <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
+<script src="http://bfred-it.github.io/iphone-inline-video/dist/iphone-inline-video.js"></script>
 <!-- Register an aframe component that allows reacting to marker events -->
 <script>
 	AFRAME.registerComponent('registerevents', {
@@ -12,6 +13,8 @@
 			var marker = this.el;
 			this.marker = document.querySelector("a-marker");
 			this.markerVisible = false;
+			var video = document.querySelector('#video1');
+			window.makeVideoPlayableInline(video, /* mute necessary for autoplay*/ false);
 		},
 		tick: function() {
 		   if (!this.marker) return;
@@ -32,14 +35,23 @@
 		   }
 		}		
 	});
+	
+	function clickPlay(){
+		var video = document.querySelector('#video1');
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }	
+	}
 </script>
 </head>
-<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;' onclick="clickPlay();">
 
 	<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false;'>
 	
 		<a-assets>
-			<video id="video1" src="video2.mp4" crossorigin="anonymous"></video>
+			<video id="video1" src="video2.mp4" crossorigin="anonymous" playsinline autoplay></video>
 		</a-assets>
 		
 
@@ -59,7 +71,9 @@
 		
 			<a-video 
 				id="videoScreen"
-				playsinline 
+				playsinline
+				autoplay 
+				muted				
 				webkit-playsinline
 				src="#video1" 
 				width="7" 
@@ -68,11 +82,13 @@
 				position='0 0 0' 
 				transparent='true'>
 			</a-video>
-
+			
+	
 		</a-marker>
 
 		<a-entity camera></a-entity>
 
 	</a-scene>
+
 </body>
 </html>
