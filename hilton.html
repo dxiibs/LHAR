@@ -46,12 +46,12 @@
 	}
 </script>
 </head>
-<body style='margin : 0px; overflow: hidden; font-family: Monospace;' onclick="clickPlay();">
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;' onclick="">
 
 	<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false;'>
 	
 		<a-assets>
-			<video id="video1" src="video1.mp4" crossorigin="anonymous" playsinline autoplay></video>
+			<img id="agenda" src="Rajesh_Nair_Visit_Agenda.png">
 		</a-assets>
 		
 
@@ -61,7 +61,6 @@
 			patternUrl='https://dxiibs.github.io/LHAR/hilton.patt'
 			url='https://dxiibs.github.io/LHAR/hilton.patt'
 			id='kanjiMarker' 
-			registerevents 
 			cursor="fuse: true; rayOrigin: mouse" 
 			emitevents="true" 
 			smooth="true" 
@@ -69,20 +68,7 @@
 			smoothTolerance="0.01" 
 			smoothThreshold="5">
 		
-			<a-video 
-				id="videoScreen"
-				playsinline
-				autoplay 
-				muted				
-				webkit-playsinline
-				src="#video1" 
-				width="7" 
-				height="3.9375" 
-				rotation="-90 0 0" 
-				position='0 0 0' 
-				transparent='true'>
-			</a-video>
-			
+			<a-image src="#agenda"></a-image>
 	
 		</a-marker>
 
